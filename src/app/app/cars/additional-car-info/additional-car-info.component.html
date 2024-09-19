@@ -1,0 +1,69 @@
+<ng-template #content_car_info let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title fw-bold" id="modal-basic-title">Car info</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+	
+	<div class="modal-body p-3">
+        <div [ngClass]="{
+            'text-center mx-auto rounded-5 p-2 price-position white-card': true,
+            'shadow-success': car.status === 'AVAILABLE',
+            'shadow-warning': car.status === 'BOOKED',
+            'shadow-danger': car.status !== 'AVAILABLE' && car.status !== 'BOOKED',
+        }">
+            <!-- Slider main container -->
+            <div class="swiper mb-2">
+                <!-- Additional required wrapper -->
+                <div class="swiper-wrapper">
+                    
+                    <!-- Slides -->
+                    <div class="swiper-slide" *ngFor="let picture of car.imagePaths">
+                        <!-- Car Image -->
+                        <div class="image-container">
+                            <img *ngIf="car.imagePaths.length > 0" [src]="picture" alt="picture" class="img-fluid">
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+    
+            <!-- Car Model, Price -->
+            <div class="d-flex justify-content-between align-items-center flex-wrap mb-2 mobile">
+                <p class="fw-bold text-secondary-emphasis" style="font-size: 1.2rem;">Model: {{ car.model }}</p>
+                <p class="fw-bold text-dark" style="font-size: 1.7rem; text-decoration: underline;">Price: {{ car.amount }}<span class="text-warning">€</span></p>
+            </div>
+    
+            <!-- Brand, Body type -->
+            <div class="d-flex justify-content-between align-items-center flex-wrap mb-2 mobile">
+                <p class="fw-bold text-secondary-emphasis" style="font-size: 1.2rem;">Brand: {{ car.brand }}</p>
+                <p class="fw-bold text-secondary-emphasis" style="font-size: 1.2rem;">Body type: {{ car.bodyType }}</p>
+            </div>
+    
+            <!-- Mileage, Color -->
+            <div class="d-flex justify-content-between align-items-center flex-wrap mb-2 mobile">
+                <p class="fw-bold text-secondary-emphasis" style="font-size: 1.2rem;">Mileage: {{ car.mileage }}</p>
+                <p class="fw-bold text-secondary-emphasis" style="font-size: 1.2rem;">Color: {{ car.color }}</p>
+            </div>
+    
+            <!-- Car City place -->
+            <div class="d-flex justify-content-between align-items-center flex-wrap mb-2 mobile">
+                <p class="fw-bold text-secondary-emphasis" style="font-size: 1.2rem;">Country: {{ car.city }}</p>
+                <p class="fw-bold text-secondary-emphasis" style="font-size: 1.5rem; text-decoration-line: underline;">{{ car.carStateNumberPlate }}</p>
+            </div>
+            
+            <!-- Start Booking -->
+            <a class="booking-btn btn border-4 rounded-4 btn-outline-warning text-secondary-emphasis fw-bold scale-hover p-2 mb-2" (click)="modal.close('Save click')"
+            (click)="navigateTo('booking'); bookCar(car)">
+                Booking
+            </a>
+    
+        </div>
+    </div>
+
+	<div class="modal-footer">
+        <!-- Back to Car page -->
+        <a class="btn btn-outline-danger text-secondary-emphasis rounded" (click)="modal.close('Save click')" style="border-radius: 20px;">Back</a>
+	</div>
+
+</ng-template>

@@ -1,0 +1,156 @@
+/*=========== Main Screen ===========*/
+.booking {
+    overflow: hidden; 
+    width: 100%; 
+    min-height: 75vh;
+    padding: 0 20px 20px 20px;
+    background-image: url('/assets/home/booking-home-2.jpg'); 
+    background-size: cover; 
+    background-position: center; 
+}
+
+.choose-date {
+    position: relative;
+    height: 75vh;
+}
+
+/*=========== Full Calendar ===========*/
+full-calendar {
+    width: 100%; 
+    height: 100%;
+    opacity: 0.8; 
+    background-color: white; 
+    padding: 20px;
+    border-radius: 8px; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/*=========== First Full Calendar ===========*/
+.first-calendar-wrapper,
+.second-calendar-wrapper {
+    position: absolute;
+    top: 50%; 
+    left: 50%; 
+    width: 40%;
+    height: 90%;
+    padding: 20px;
+    transition: transform 0.3s ease, opacity 0.3s ease; 
+}
+
+.first-calendar-wrapper {
+    transform: translate(-150%, -50%); 
+    opacity: 0; 
+}
+
+/*=========== Second Full Calendar ===========*/
+.second-calendar-wrapper {
+    transform: translate(150%, -50%); 
+    opacity: 0; 
+}
+
+.active {
+    transform: translate(-50%, -50%); 
+    opacity: 1; 
+}
+
+/*=========== Confirmation Card ===========*/
+.confirmation-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    position: relative; 
+    margin-top: 100px;
+}
+
+.car-card {
+    width: 40%; 
+    margin-right: 20px; 
+}
+
+.order-confirmation-card {
+    width: 50%; 
+    padding: 20px;
+    border-radius: 25px;
+    background-color: #f8f9fa; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.shadow-warning {
+    box-shadow: 0 0 5px 5px rgba(255, 196, 0, 0.993);
+}
+
+.total-amount {
+    font-style: italic; 
+    font-size: 1.4rem; 
+}
+
+.price {
+    font-size: 1.5rem; 
+    font-weight: bold; 
+}
+
+/*=========== Car Image Container ===========*/
+.image-container {
+    width: 100%; 
+    height: 300px; 
+    overflow: hidden; 
+    position: relative; 
+    border-radius: 25px;
+}
+
+.image-container img {
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+}
+
+/*=========== Adapting ===========*/
+@media screen and (max-width: 1620px) {
+    .first-calendar-wrapper,
+    .second-calendar-wrapper {
+        width: 60%; 
+    }
+}
+
+@media screen and (max-width: 1220px) {
+
+    .booking {
+        align-items: flex-start;
+    }
+    
+    .first-calendar-wrapper,
+    .second-calendar-wrapper {
+        width: 100%; 
+        padding: 5px;
+    }
+
+    .confirmation-container {
+        flex-direction: column;
+        align-items: center;
+
+    }
+
+    .car-card {
+        order: 2;
+        width: 100%;
+        margin: 0;
+    }
+
+    .order-confirmation-card {
+        order: 1;
+        width: 100%;
+        margin-bottom: 30px;
+    }
+
+    
+}
+
+@media screen and (max-width: 400px) {
+    .order-confirmation-card {
+        padding: 15px;
+    }
+}

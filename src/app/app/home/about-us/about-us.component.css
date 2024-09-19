@@ -1,0 +1,11 @@
+/*=========== Main Screen ===========*/
+.about {
+    min-height: 75%;
+    background-image: url('/assets/home/about-us.jpg');
+    background-position: center;
+    background-size: cover;
+}
+
+.list_style_inside {
+    list-style: inside;
+}

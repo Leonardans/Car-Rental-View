@@ -1,0 +1,30 @@
+<!-- Admin Login Modal -->
+<app-manager-login></app-manager-login>
+
+<!-- How It Works -->
+<app-how-it-works></app-how-it-works>
+
+<footer class="bg-warning" style="height: 10vh; min-height: 50px;">
+    <nav class="d-flex justify-content-between align-items-center h-100">
+
+        <!-- Logos -->
+        <a class="footer-logo btn" (click)="navigateTo('')" style="width: auto; height: 90%; min-height: 40px;">
+            <img src="/assets/logo/sun.png" alt="logo" style="width: 100%; height: 100%; display: block;">
+        </a>
+
+        <!-- Help button -->
+        <div *ngIf="(userType === 'Customer')">
+            <button class="fw-bold btn border-3 rounded-3 btn-outline-dark text-white p-2 scale-hover" style="font-size: 1.1rem;" (click)="openCustomerTour()">Take a tour</button>
+        </div>
+
+        <!-- Admin Login or Logout button -->
+        <div class="d-flex align-items-center me-3">
+            <ng-container *ngIf="(userType === 'Business' || userType === 'Customer') && isUserLoggedIn; else adminButton">
+                <button class="btn border-2 rounded-3 btn-outline-danger text-white" (click)="logout()">Logout</button>
+            </ng-container>
+            <ng-template #adminButton>
+                <a class="btn border-2 rounded-3 btn-outline-danger text-white" (click)="openAdminLogin()">Admin</a>
+            </ng-template>
+        </div>
+    </nav>
+</footer>

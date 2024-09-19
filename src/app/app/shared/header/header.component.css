@@ -1,0 +1,220 @@
+/*=========== Header ===========*/
+header {
+    position: relative;
+}
+
+/*=========== Logos ===========*/
+.logo-container {
+    width: 100px; 
+    height: 75%; 
+    overflow: hidden; 
+    position: relative; 
+    border-radius: 25px;
+}
+
+.logo-container img {
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+}
+
+/*=========== Burger ===========*/
+.menu_icon {
+    display: none;
+}
+
+/*=========== Nav ===========*/
+.nav {
+    margin-left: 20px;
+}
+
+.nav ul {
+    margin-bottom: 0;
+}
+
+.nav_link {
+    font-size: 20px;
+}
+
+/*=========== Bootstrap Icons ===========*/
+.icon-style {
+    font-size: 2rem;
+    color: whitesmoke;
+}
+
+/*=========== Adapting ===========*/
+@media screen and (max-width: 768px) {
+
+    /*==== Logo ====*/
+    .logo {
+        display: none;
+    }
+    
+    /*==== Nav ====*/
+    .nav {
+		display: block;
+		position: absolute;
+		width: 90%;
+		height: 90vh;
+		padding-top: 80px;
+        margin: 20px;
+		background-color: #303030;
+        border: 5px solid #000;
+        border-radius: 30px;
+		z-index: 5;
+        top: -110vh;
+        transition: all 0.3s;
+	}
+
+	.nav.active {
+        top: 0;
+        left: 0;
+        transition: all 0.3s;
+	}
+
+    .nav ul {
+        list-style-type: none;
+        padding: 0;
+        display: flex; 
+        flex-direction: column;
+    }
+
+	.nav_link {
+		list-style: none;
+		margin-bottom: 30px;
+	}
+
+    .nav_link a {
+        font-size: 40px;
+    }
+
+	.header-nav_link:last-child {
+		margin-bottom: 0;
+	}
+
+	.header-nav_link a{ 
+		font-size: 50px;
+		color: #fff;
+	}
+    
+    /*==== Burger ====*/
+    .menu_icon {
+        z-index: 7;
+        display: block;
+        position: relative;
+        width: 30px;
+        height: 18px;
+        cursor: pointer;
+    }
+
+    .menu_icon.active {
+        margin-top: 2px;
+        margin-left: 22px;
+    }
+    
+    .menu_icon span,
+    .menu_icon::before,
+    .menu_icon::after {
+        left: 0;
+        position: absolute;
+        height: 10%;
+        width: 100%;
+        transition: all 0.2s ease 0s;
+        background-color: #fff;
+    }
+    
+    .menu_icon::before,
+    .menu_icon::after {
+        content: " ";
+    }
+    
+    .menu_icon::before {
+        top: 0;
+    }
+    
+    .menu_icon::after {
+        bottom: 0;
+    }
+    
+    .menu_icon span {
+        top: 50%;
+        transform: scale(1) translate(0px, -50%);
+    }
+
+    .active span {
+        display: none;		
+    }
+    
+    .active::before {
+        background-color: #fff;
+        top: 50%;
+        transform: rotate(45deg) translate(0px, -50%);
+    }
+    
+    .active::after {
+        background-color: #fff;
+        bottom: 50%;
+        transform: rotate(-45deg) translate(0px, 50%);
+    }
+
+    /*==== Bootstrap Icons ====*/
+    .icon-style {
+        font-size: 1.5rem;
+    }
+}
+
+@media screen and (max-width: 380px) {
+
+    .menu_icon.active {
+        margin-top: 25px;
+    }
+
+}
+
+/*=========== Hover Effects ===========*/
+.scale-hover {
+    transition: transform 0.3s; 
+}
+
+.scale-hover:hover {
+    transform: scale(1.1); 
+}
+
+/*=========== Nav Yellow Decor ===========*/
+.yellow-decor {
+    color: inherit; 
+    text-decoration: none; 
+    position: relative; 
+    transition: color 0.5s ease; 
+}
+
+.yellow-decor:hover {
+    display: block;
+    color: yellow; 
+    cursor: pointer;
+    position: relative; 
+    transition: color 0.5s ease;
+    transform: 0.5s ease;
+    transform: scale(1.1);
+}
+
+.yellow-decor::after {
+    content: ''; 
+    position: absolute; 
+    left: 0; 
+    bottom: -2px; 
+    width: 100%; 
+    height: 2px; 
+    background-color: yellow; 
+    transform: scaleX(0); 
+    transition: transform 0.5s ease; 
+}
+
+.yellow-decor:hover::after {
+    transform: scaleX(1);
+}
+

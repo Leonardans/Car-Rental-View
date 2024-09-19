@@ -1,0 +1,237 @@
+<!-- Additional Car Info -->
+<app-additional-car-info></app-additional-car-info>
+
+<!-- Cars Section -->
+<div class="cars-bg p-2">
+    <div [ngClass]="isLargeScreen ? 'container' : 'container-fluid'">
+
+        <div class="p-2 min-vh-75">
+                    
+            <!-- Cars Filtering -->
+            <div class="rounded-4 text-center mx-auto mb-5 p-2 filter-shadow">
+                <div class="row g-1">
+                    <!-- City -->
+                    <div class="col">
+                        <div ngbDropdown class="d-inline-block">
+                            <button type="button" class="btn border-2 rounded-3 btn-outline-dark" ngbDropdownToggle>
+                                City
+                            </button>
+                            <div ngbDropdownMenu aria-labelledby="dropdownBasic2" class="custom-dropdown-menu">
+                                <button ngbDropdownItem class="hover" (click)="selectCity('Tallinn')">Tallinn</button>
+                                <button ngbDropdownItem class="hover" (click)="selectCity('Tartu')">Tartu</button>
+                                <button ngbDropdownItem class="hover" (click)="selectCity('Narva')">Narva</button>
+                                <button ngbDropdownItem class="hover" (click)="selectCity('Rakvere')">Rakvere</button>
+                                <button ngbDropdownItem class="hover" (click)="selectCity('Pärnu')">Pärnu</button>
+                                <button ngbDropdownItem class="hover" (click)="selectCity('Haapsalu')">Haapsalu</button>
+                                <button ngbDropdownItem class="hover" (click)="selectCity('Tapa')">Tapa</button>
+                                <button ngbDropdownItem class="hover" (click)="selectCity('')">All</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Brand -->
+                    <div class="col">
+                        <div ngbDropdown class="d-inline-block" >
+                            <button type="button" class="btn border-2 rounded-3 btn-outline-dark" ngbDropdownToggle>
+                                Brand
+                            </button>
+                            <div ngbDropdownMenu aria-labelledby="dropdownBasic2" class="custom-dropdown-menu">
+                                <button ngbDropdownItem class="hover" (click)="selectBrand('BMW')">BMW</button>
+                                <button ngbDropdownItem class="hover" (click)="selectBrand('Audi')">Audi</button>
+                                <button ngbDropdownItem class="hover" (click)="selectBrand('Mercedes-Benz')">Mercedes-Benz</button>
+                                <button ngbDropdownItem class="hover" (click)="selectBrand('Toyota')">Toyota</button>
+                                <button ngbDropdownItem class="hover" (click)="selectBrand('Ford')">Ford</button>
+                                <button ngbDropdownItem class="hover" (click)="selectBrand('Honda')">Honda</button>
+                                <button ngbDropdownItem class="hover" (click)="selectBrand('Volkswagen')">Volkswagen</button>
+                                <button ngbDropdownItem class="hover" (click)="selectBrand('Nissan')">Nissan</button>
+                                <button ngbDropdownItem class="hover" (click)="selectBrand('Volvo')">Volvo</button>
+                                <button ngbDropdownItem class="hover" (click)="selectBrand('Renault')">Renault</button>
+                                <button ngbDropdownItem class="hover" (click)="selectBrand('Kia')">Kia</button>
+                                <button ngbDropdownItem class="hover" (click)="selectBrand('Skoda')">Skoda</button>
+                                <button ngbDropdownItem class="hover" (click)="selectBrand('Mazda')">Mazda</button>
+                                <button ngbDropdownItem class="hover" (click)="selectBrand('Hyundai')">Hyundai</button>
+                                <button ngbDropdownItem class="hover" (click)="selectBrand('Peugeot')">Peugeot</button>
+                                <button ngbDropdownItem class="hover" (click)="selectBrand('Subaru')">Subaru</button>
+                                <button ngbDropdownItem class="hover" (click)="selectBrand('Tesla')">Tesla</button>
+                                <button ngbDropdownItem class="hover" (click)="selectBrand('Alfa Romeo')">Alfa Romeo</button>
+                                <button ngbDropdownItem class="hover" (click)="selectBrand('Fiat')">Fiat</button>
+                                <button ngbDropdownItem class="hover" (click)="selectBrand('Jeep')">Jeep</button>
+                                <button ngbDropdownItem class="hover" (click)="selectBrand('Opel')">Opel</button>
+                                <button ngbDropdownItem class="hover" (click)="selectBrand('Citroën')">Citroën</button>
+                                <button ngbDropdownItem class="hover" (click)="selectBrand('Porsche')">Porsche</button>
+                                <button ngbDropdownItem class="hover" (click)="selectBrand('Mitsubishi')">Mitsubishi</button>
+                                <button ngbDropdownItem class="hover" (click)="selectBrand('Lexus')">Lexus</button>
+                                <button ngbDropdownItem class="hover" (click)="selectBrand('Seat')">Seat</button>
+                                <button ngbDropdownItem class="hover" (click)="selectBrand('Suzuki')">Suzuki</button>
+                                <button ngbDropdownItem class="hover" (click)="selectBrand('Dodge')">Dodge</button>
+                                 <button ngbDropdownItem class="hover" (click)="selectBrand('Jaguar')">Jaguar</button>
+                                <button ngbDropdownItem class="hover" (click)="selectBrand('Bentley')">Bentley</button>
+                                <button ngbDropdownItem class="hover" (click)="selectBrand('Cadillac')">Cadillac</button>
+                                <button ngbDropdownItem class="hover" (click)="selectBrand('Maserati')">Maserati</button>
+                                <button ngbDropdownItem class="hover" (click)="selectBrand('Rolls-Royce')">Rolls-Royce</button>
+                                <button ngbDropdownItem class="hover" (click)="selectBrand('')">All</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Model -->
+                    <div class="col">
+                        <div ngbDropdown class="d-inline-block">
+                            <button type="button" class="btn border-2 rounded-3 btn-outline-dark" ngbDropdownToggle>
+                                Model
+                            </button>
+                            <div ngbDropdownMenu aria-labelledby="dropdownBasic2" class="custom-dropdown-menu">
+                                <button ngbDropdownItem class="hover" (click)="selectModel('508')">508</button>
+                                <button ngbDropdownItem class="hover" (click)="selectModel('Cullinan')">Cullinan</button>
+                                <button ngbDropdownItem class="hover" (click)="selectModel('Levante')">Levante</button>
+                                <button ngbDropdownItem class="hover" (click)="selectModel('Escalade')">Escalade</button>
+                                <button ngbDropdownItem class="hover" (click)="selectModel('Bentayga')">Bentayga</button>
+                                <button ngbDropdownItem class="hover" (click)="selectModel('XE')">XE</button>
+                                <button ngbDropdownItem class="hover" (click)="selectModel('Charger')">Charger</button>
+                                <button ngbDropdownItem class="hover" (click)="selectModel('Swift')">Swift</button>
+                                <button ngbDropdownItem class="hover" (click)="selectModel('Leon')">Leon</button>
+                                <button ngbDropdownItem class="hover" (click)="selectModel('RX')">RX</button>
+                                <button ngbDropdownItem class="hover" (click)="selectModel('Outlander')">Outlander</button>
+                                <button ngbDropdownItem class="hover" (click)="selectModel('Range Rover')">Range Rover</button>
+                                <button ngbDropdownItem class="hover" (click)="selectModel('Macan')">Macan</button>
+                                <button ngbDropdownItem class="hover" (click)="selectModel('Cooper')">Cooper</button>
+                                <button ngbDropdownItem class="hover" (click)="selectModel('C3')">C3</button>
+                                <button ngbDropdownItem class="hover" (click)="selectModel('Astra')">Astra</button>
+                                <button ngbDropdownItem class="hover" (click)="selectModel('Cherokee')">Cherokee</button>
+                                <button ngbDropdownItem class="hover" (click)="selectModel('500')">500</button>
+                                <button ngbDropdownItem class="hover" (click)="selectModel('Giulia')">Giulia</button>
+                                <button ngbDropdownItem class="hover" (click)="selectModel('Model 3')">Model 3</button>
+                                <button ngbDropdownItem class="hover" (click)="selectModel('Forester')">Forester</button>
+                                <button ngbDropdownItem class="hover" (click)="selectModel('3008')">3008</button>
+                                <button ngbDropdownItem class="hover" (click)="selectModel('Tucson')">Tucson</button>
+                                <button ngbDropdownItem class="hover" (click)="selectModel('CX-5')">CX-5</button>
+                                <button ngbDropdownItem class="hover" (click)="selectModel('Octavia')">Octavia</button>
+                                <button ngbDropdownItem class="hover" (click)="selectModel('Sportage')">Sportage</button>
+                                <button ngbDropdownItem class="hover" (click)="selectModel('Megane')">Megane</button>
+                                <button ngbDropdownItem class="hover" (click)="selectModel('XC60')">XC60</button>
+                                <button ngbDropdownItem class="hover" (click)="selectModel('GLE')">GLE</button>
+                                <button ngbDropdownItem class="hover" (click)="selectModel('Qashqai')">Qashqai</button>
+                                <button ngbDropdownItem class="hover" (click)="selectModel('Golf')">Golf</button>
+                                <button ngbDropdownItem class="hover" (click)="selectModel('Civic')">Civic</button>
+                                <button ngbDropdownItem class="hover" (click)="selectModel('A4')">A4</button>
+                                <button ngbDropdownItem class="hover" (click)="selectModel('X5')">X5</button>
+                                <button ngbDropdownItem class="hover" (click)="selectModel('Fiesta')">Fiesta</button>
+                                <button ngbDropdownItem class="hover" (click)="selectModel('Corolla')">Corolla</button>
+                                <button ngbDropdownItem class="hover" (click)="selectModel('')">All</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Body type -->
+                    <div class="col">
+                        <div ngbDropdown class="d-inline-block">
+                            <button type="button" class="btn border-2 rounded-3 btn-outline-dark" ngbDropdownToggle>
+                                Body type
+                            </button>
+                            <div ngbDropdownMenu aria-labelledby="dropdownBasic2" class="custom-dropdown-menu">
+                                <button ngbDropdownItem class="hover" (click)="selectBodyType('Sedan')">Sedan</button>
+                                <button ngbDropdownItem class="hover" (click)="selectBodyType('Coupe')">Coupe</button>
+                                <button ngbDropdownItem class="hover" (click)="selectBodyType('Hatchback')">Hatchback</button>
+                                <button ngbDropdownItem class="hover" (click)="selectBodyType('SUV')">SUV</button>
+                                <button ngbDropdownItem class="hover" (click)="selectBodyType('Crossover')">Crossover</button>
+                                <button ngbDropdownItem class="hover" (click)="selectBodyType('Minivan')">Minivan</button>
+                                <button ngbDropdownItem class="hover" (click)="selectBodyType('Roadster')">Roadster</button>
+                                <button ngbDropdownItem class="hover" (click)="selectBodyType('')">All</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Color -->
+                    <div class="col">
+                        <div ngbDropdown class="d-inline-block">
+                            <button type="button" class="btn border-2 rounded-3 btn-outline-dark" ngbDropdownToggle>
+                                Color
+                            </button>
+                            <div ngbDropdownMenu aria-labelledby="dropdownBasic2" class="custom-dropdown-menu">
+                                <button ngbDropdownItem class="hover" (click)="selectColor('Black')">Black</button>
+                                <button ngbDropdownItem class="hover" (click)="selectColor('White')">White</button>
+                                <button ngbDropdownItem class="hover" (click)="selectColor('Red')">Red</button>
+                                <button ngbDropdownItem class="hover" (click)="selectColor('Blue')">Blue</button>
+                                <button ngbDropdownItem class="hover" (click)="selectColor('Green')">Green</button>
+                                <button ngbDropdownItem class="hover" (click)="selectColor('Yellow')">Yellow</button>
+                                <button ngbDropdownItem class="hover" (click)="selectColor('Orange')">Orange</button>
+                                <button ngbDropdownItem class="hover" (click)="selectColor('Brown')">Brown</button>
+                                <button ngbDropdownItem class="hover" (click)="selectColor('Pink')">Pink</button>
+                                <button ngbDropdownItem class="hover" (click)="selectColor('Silver')">Silver</button>
+                                <button ngbDropdownItem class="hover" (click)="selectColor('Grey')">Grey</button>
+                                <button ngbDropdownItem class="hover" (click)="selectColor('')">All</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Price -->
+                    <div class="col">
+                        <div ngbDropdown class="d-inline-block">
+                            <button type="button" class="btn border-2 rounded-3 btn-outline-dark" ngbDropdownToggle>
+                                Price
+                            </button>
+                            <div ngbDropdownMenu aria-labelledby="dropdownBasic2" class="custom-dropdown-menu">
+                                <button ngbDropdownItem class="hover" (click)="selectPrice('Ascending')">Ascending</button>
+                                <button ngbDropdownItem class="hover" (click)="selectPrice('Descending')">Descending</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex align-items-end justify-content-between">
+                        <!-- Data-Picker -->
+                        <app-datepicker-range-popup (dateRangeSelected)="onDateRangeSelected($event)" class="mt-5"></app-datepicker-range-popup>
+
+                        <!-- Reset Button -->
+                        <a class="btn border-3 rounded-3 btn-outline-dark fw-bold ms-2" (click)="resetFilters()">ALL</a>
+                    </div>
+
+                </div>
+            </div> 
+            
+            <!-- Cars Table -->
+            <div class="cars-table mb-3">
+                <div class="row g-4">
+
+                    <!-- Cars from Server -->
+                    <div class="custom-col" *ngFor="let car of displayedCars">
+                        <div [ngClass]="{
+                            'text-center mx-auto rounded-5 p-2 price-position white-card': true,
+                            'shadow-success': car.status === 'AVAILABLE',
+                            'shadow-warning': car.status === 'BOOKED',
+                            'shadow-danger': car.status !== 'AVAILABLE' && car.status !== 'BOOKED',
+                        }">
+                                                       
+                            <div class="image-container shadow-lg mb-4 p-1 scale-hover" (click)="openAdditionalCarInfo(car)">
+                                <img *ngIf="car.imagePaths.length > 0" [src]="car.imagePaths[0]" alt="image" class="img-fluid">
+                            </div>
+                            <p class="fw-bold text-secondary-emphasis mb-3" style="font-size: 1.4rem; 
+                                white-space: nowrap; 
+                                overflow: hidden; 
+                                text-overflow: ellipsis; 
+                                max-width: 100%;">
+                                {{ car.brand }}: {{ car.model }}
+                            </p>
+
+                           
+                            <a [ngClass]="{'btn d-block w-50 rounded-4 text-secondary-emphasis fw-bold scale-hover booking-hover mx-auto p-2 mb-3': true, 
+                            'shadow-success': car.status === 'AVAILABLE',
+                            'shadow-warning': car.status === 'BOOKED',
+                            'shadow-danger': car.status !== 'AVAILABLE' && car.status !== 'BOOKED',
+                        }"style="font-size: 1.1rem;" (click)="bookCar(car)">
+                                Booking
+                            </a>
+                            <a class="btn border-2 rounded-4 btn-outline-dark fw-bold scale-hover mb-2" (click)="navigateTo('garage')">Add to Garage</a>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <button class="btn border-3 rounded-4 text-black fw-bold btn-outline-danger scale-hover" (click)="loadMoreCars()" [disabled]="currentCount >= maxCount">Load More</button>
+                    </div>
+                    
+                </div>
+            </div>   
+              
+        </div>
+     
+    </div>
+</div>

@@ -1,0 +1,25 @@
+/*=========== Form Input Styling ===========*/
+input.ng-invalid.ng-touched {
+    border-color: red;
+}
+
+/*=========== NG Modal Styling ===========*/
+.modal-body {
+    max-height: 80vh; 
+    overflow-y: auto; 
+}
+
+.modal-footer {
+    position: sticky; 
+    bottom: 0; 
+    background: white; 
+    z-index: 1; 
+}
+
+/*=========== Adapting ===========*/
+@media screen and (max-width: 768px) {
+    .modal-body {
+        height: 75vh; 
+    }
+}
+

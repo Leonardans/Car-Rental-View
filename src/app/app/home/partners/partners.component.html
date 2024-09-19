@@ -1,0 +1,21 @@
+<div class="partners">
+
+    <!-- Slider main container -->
+    <div class="swiper">
+        <!-- Additional required wrapper -->
+        <div class="swiper-wrapper">
+            
+            <!-- Slides -->
+            <div class="swiper-slide" *ngFor="let logo of rentalLogos">
+
+                <!-- Partner Logo -->
+                <div class="image-container">
+                    <img [src]="logo.logoUrl" class="img-fluid" [alt]="logo.name" style="width: 100%; height: 100%;">
+                </div>
+            
+            </div>
+
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,51 @@
+<div class="booking">
+    <div class="choose-date">
+
+        <!-- Full-Calendar Date From -->
+        <div class="first-calendar-wrapper" (click)="toggleMenu()" [ngClass]="{'active': showFirstCalendar}" *ngIf="dataLoaded">
+            <full-calendar [options]="firstCalendarOptions"></full-calendar>
+        </div>
+        <!-- Full-Calendar Date To -->
+        <div class="second-calendar-wrapper" (click)="toggleMenu()" [ngClass]="{'active': showSecondCalendar}" *ngIf="dataLoaded">
+            <full-calendar [options]="secondCalendarOptions"></full-calendar>
+        </div>
+        
+    </div>
+
+    <!-- Confirmation card -->
+    <div *ngIf="car" >
+        <div class="confirmation-card">
+            <div *ngIf="showConfirmation" class="confirmation-container">
+            
+                <div class="car-card">
+                    <div class="text-center mx-auto rounded-5 p-2 price-position white-card shadow-warning">
+                        <div class="image-container shadow-lg mb-4 p-1 scale-hover">
+                            <img *ngIf="car.imagePaths.length > 0" [src]="car.imagePaths[0]" alt="image" class="img-fluid">
+                        </div>
+                        <p class="fw-bold text-white mb-3" style="font-size: 1.4rem; 
+                            white-space: nowrap; 
+                            overflow: hidden; 
+                            text-overflow: ellipsis; 
+                            max-width: 100%;">
+                            {{ car.brand }}: {{ car.model }}
+                        </p>
+                    </div>
+                </div>
+    
+                <div class="order-confirmation-card">
+                    <h2>Confirmation of Order</h2>
+                    <p class="total-amount mb-5">
+                        Total Amount: <span class="price">{{ reservationAmount }}€</span>
+                    </p>
+                    <button class="btn btn-outline-danger me-4" (click)="navigateTo('payment')">Bank Transfer</button>
+                    <button class="btn btn-outline-success" (click)="confirmBookingWithoutPayment()">Pay on Location</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+

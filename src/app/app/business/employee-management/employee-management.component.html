@@ -1,0 +1,130 @@
+<div class="employee-bg p-4">
+    <div class="p-2">
+        <div class="row g-3 flex-wrap">
+
+            <!-- Employee Info -->
+            <div class="custom-col" *ngFor="let employee of employees; let i = index">
+                <div class="border border-2 border-warning shadow-sm rounded-4 p-2 mb-5 mx-auto text-center">
+    
+                    <div class="d-flex justify-content-between p-2">
+                        <i class="bi bi-person-circle employee-logo mb-5"></i>
+                        <p class="fw-bold card-text name">{{ employee.branchId }}</p>
+                        <i class="bi bi-x-circle btn icon-style delete-btn" (click)="openDeleteEmployeeModal(employee)"></i>
+                    </div>
+                    <p class="fw-bold card-text name">{{ employee.firstname }}  {{ employee.lastname }}</p>
+                    <p class="fw-bold card-text" style="font-size: 1.5rem;">{{ employee.position }}</p>
+                    <p class="fw-bold card-text">{{ employee.email }}</p>
+                    
+                </div>
+            </div>
+
+            <!-- Confirmation Modal -->
+            <div id="confirmationModal" class="modal" style="display: none;">
+                <div class="modal-content">
+                    <div class="modal-header d-flex justify-content-between align-items-center">
+                        <h4>Confirmation</h4>
+                        <span class="close display-block" (click)="closeModal()">&times;</span>
+                    </div>
+                    <div class="modal-body">
+                        Are you shure?
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" (click)="closeModal()">Cancel</button>
+                        <button class="btn btn-danger" (click)="confirmDeleteEmployee()">Delete Employee</button>
+                    </div>
+                </div>
+            </div>
+    
+        </div>
+    </div>
+</div>
+
+<!-- Add Employee  -->
+<ng-template #content_add_employee let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">New Employee Form</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+
+	<div class="modal-body">
+		
+        <form [formGroup]="employeeForm" (ngSubmit)="onSubmitEmployee()">
+            <div class="d-flex justify-content-between mb-4">
+                <!-- First Name -->
+                <div class="me-4">
+                    <label for="firstname" class="form-label">First Name:</label>
+                    <input type="text" id="firstname" class="form-control" formControlName="firstname">
+                    <div *ngIf="employeeForm.get('firstname')?.invalid && (employeeForm.get('firstname')?.touched || employeeForm.get('firstname')?.dirty)" class="text-danger">
+                        <div *ngIf="employeeForm.get('firstname')?.errors?.['required']">Name is required.</div>
+                        <div *ngIf="employeeForm.get('firstname')?.errors?.['pattern']">Name is not valid.</div>
+                    </div>
+                </div>
+                            
+                <!-- Last Name -->
+                <div class="">
+                    <label for="lastname" class="form-label">Last Name:</label>
+                    <input type="text" id="lastname" class="form-control" formControlName="lastname">
+                    <div *ngIf="employeeForm.get('lastname')?.invalid && (employeeForm.get('lastname')?.touched || employeeForm.get('lastname')?.dirty)" class="text-danger">
+                        <div *ngIf="employeeForm.get('lastname')?.errors?.['required']">Last Name is required.</div>
+                        <div *ngIf="employeeForm.get('lastname')?.errors?.['pattern']">Error.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-between mb-4">
+                <!-- Username -->
+                <div class="me-4">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" id="username" class="form-control" formControlName="username" name="username">
+                    <div *ngIf="employeeForm.get('username')?.invalid && (employeeForm.get('username')?.touched || employeeForm.get('username')?.dirty)" class="text-danger">
+                        <div *ngIf="employeeForm.get('username')?.errors?.['required']">Username is required.</div>
+                        <div *ngIf="employeeForm.get('username')?.errors?.['pattern']">Error.</div>
+                    </div>
+                </div>
+                <!-- Password -->
+                <div class="">
+                    <label for="password" class="form-label">Password:</label>
+                    <input type="password" id="password" class="form-control" formControlName="password" name="password">
+                    <div *ngIf="employeeForm.get('password')?.invalid && (employeeForm.get('password')?.touched || employeeForm.get('password')?.dirty)" class="text-danger">
+                        <div *ngIf="employeeForm.get('password')?.errors?.['required']">Password is required.</div>
+                        <div *ngIf="employeeForm.get('password')?.errors?.['pattern']">Error.</div>
+                    </div>
+                </div>
+            </div>
+        
+            <!-- Email -->
+            <div class="mb-3">
+                <label for="email" class="form-label">Email:</label>
+                <input type="email" id="email" class="form-control" formControlName="email" name="email">
+                <div *ngIf="employeeForm.get('email')?.invalid && (employeeForm.get('email')?.touched || employeeForm.get('email')?.dirty)" class="text-danger">
+                    <div *ngIf="employeeForm.get('email')?.errors?.['required']">Email is required.</div>
+                    <div *ngIf="employeeForm.get('email')?.errors?.['pattern']">Email is not valid.</div>
+                </div>
+            </div>
+
+            <!-- Position -->
+            <div class="mb-3">
+                <label for="position" class="form-label">Position:</label>
+                <input type="text" id="position" class="form-control" formControlName="position" name="position">
+                <div *ngIf="employeeForm.get('position')?.invalid && (employeeForm.get('position')?.touched || employeeForm.get('position')?.dirty)" class="text-danger">
+                    <div *ngIf="employeeForm.get('position')?.errors?.['required']">Email is required.</div>
+                    <div *ngIf="employeeForm.get('position')?.errors?.['pattern']">Email is not valid.</div>
+                </div>
+            </div>
+
+        </form>
+
+        <!-- Alerts -->
+		<div *ngIf="successMessage" class="alert alert-success">{{ successMessage }}</div>
+		<div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+
+	</div>
+
+	<div class="modal-footer">
+        <button type="button" class="btn border-3 rounded-3 btn-outline-success" (click)="onSubmitEmployee()">Add</button>
+	</div>
+</ng-template>
+
+
+
+    

@@ -1,0 +1,93 @@
+<ng-template #content_login let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Embrace new possibilities!</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+
+    <div class="modal-body">
+        <ul class="nav nav-tabs mb-5" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="customer-tab" data-bs-toggle="tab" data-bs-target="#customer" type="button" role="tab" aria-controls="customer" aria-selected="true" (click)="onUserTypeChange(); userType = 'Customer'">Customer</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="business-tab" data-bs-toggle="tab" data-bs-target="#business" type="button" role="tab" aria-controls="business" aria-selected="false" (click)="onUserTypeChange(); userType = 'Business'">Business</button>
+            </li>
+        </ul>
+        
+        <div class="form_container">
+            <div class="tab-content mb-5" id="myTabContent">
+        
+                <!-- Customer -->
+                <div class="tab-pane fade show active" id="customer" role="tabpanel" aria-labelledby="customer-tab">
+                    <form [formGroup]="customerForm" (ngSubmit)="onSubmitCustomer()">
+        
+                        <!-- Username -->
+                        <div class="me-4">
+                            <label for="username" class="form-label">Username</label>
+                            <input type="text" id="username" class="form-control" formControlName="username" name="username" autocomplete="username">
+                            <div *ngIf="customerForm.get('username')?.invalid && (customerForm.get('username')?.touched || customerForm.get('username')?.dirty)" class="text-danger">
+                                <div *ngIf="customerForm.get('username')?.errors?.['required']">Username is required.</div>
+                                <div *ngIf="customerForm.get('username')?.errors?.['pattern']">Username can only contain letters.</div>
+                            </div>
+                        </div>
+        
+                        <!-- Password -->
+                        <div class="">
+                            <label for="password" class="form-label">Password:</label>
+                            <input type="password" id="password" class="form-control" formControlName="password" name="password" autocomplete="current-password">
+                            <div *ngIf="customerForm.get('password')?.invalid && (customerForm.get('password')?.touched || customerForm.get('password')?.dirty)" class="text-danger">
+                                <div *ngIf="customerForm.get('password')?.errors?.['required']">Password is required.</div>
+                                <div *ngIf="customerForm.get('password')?.errors?.['pattern']">Password can only contain letters and numbers.</div>
+                            </div>
+                        </div>
+        
+                    </form>
+                </div>
+        
+                <!-- Business -->
+                <div class="tab-pane fade" id="business" role="tabpanel" aria-labelledby="business-tab">
+                    <form [formGroup]="businessForm" (ngSubmit)="onSubmitBusiness()">
+        
+                        <!-- Business Name -->
+                        <div class="mb-3">
+                            <label for="businessName" class="form-label">Business Username:</label>
+                            <input type="text" id="businessName" class="form-control" formControlName="businessName" name="businessName" autocomplete="organization">
+                            <div *ngIf="businessForm.get('businessName')?.invalid && (businessForm.get('businessName')?.touched || businessForm.get('businessName')?.dirty)" class="text-danger">
+                                <div *ngIf="businessForm.get('businessName')?.errors?.['required']">Business name is required.</div>
+                                <div *ngIf="businessForm.get('businessName')?.errors?.['pattern']">Check the business name.</div>
+                            </div>
+                        </div>
+        
+                        <!-- Password -->
+                        <div class="mb-3">
+                            <label for="businessPassword" class="form-label">Password:</label>
+                            <input type="password" id="businessPassword" class="form-control" formControlName="businessPassword" name="businessPassword" autocomplete="current-password">
+                            <div *ngIf="businessForm.get('businessPassword')?.invalid && (businessForm.get('businessPassword')?.touched || businessForm.get('businessPassword')?.dirty)" class="text-danger">
+                                <div *ngIf="businessForm.get('businessPassword')?.errors?.['required']">Password is required.</div>
+                                <div *ngIf="businessForm.get('businessPassword')?.errors?.['pattern']">Check the password.</div>
+                            </div>
+                        </div>
+        
+                    </form>
+                </div>
+        
+            </div>
+        </div>
+        
+        <!-- Alerts -->
+		<div *ngIf="successMessage" class="alert alert-success">{{ successMessage }}</div>
+		<div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+
+    </div>
+
+    <!-- Send or Close buttons -->
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" (click)="modal.close('Cross click')">Cancel</button>
+        <button type="button" class="btn btn-primary" 
+                (click)="userType === 'Customer' ? onSubmitCustomer() : onSubmitBusiness()" 
+                [disabled]="(userType === 'Customer' && !customerForm.valid) || (userType === 'Business' && !businessForm.valid)">
+            Login
+        </button>
+    </div>
+
+</ng-template>

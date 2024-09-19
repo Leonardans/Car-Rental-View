@@ -1,0 +1,302 @@
+<!-- Office Management Section -->
+<div class="p-3 office-bg">
+    <div class="container">
+    
+        <div class="mb-3">
+            <div class="row g-3">
+
+                <!-- Office Management Section -->
+                <div class="col-12">
+                    <div *ngIf="branches.length === 0" class="text-center p-5 border border-secondary rounded">
+                        <h4>No branches have been opened yet</h4>
+                        <button class="btn btn-primary mt-3" (click)="openAddBranchModal()">Add a New Branch</button>
+                    </div>
+                    <div *ngFor="let branch of branches; let i = index">
+                        <div [ngClass]="{
+                            'rounded-4 p-2 mb-5 mx-auto': true,
+                            'shadow-danger': countAvailableCars(branch) <= 2,
+                            'shadow-success': countAvailableCars(branch) > 2
+                        }">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="fw-bold line order-num">{{ i + 1 }}</span>
+                                <span class="fw-bold city">{{ branch.city }}</span>
+                                <i class="bi bi-house-fill icon-style btn border-4 rounded-3 btn-outline-warning mobile" (click)="open(content_branch_info, branch)"></i>
+                                <i class="bi bi-car-front-fill icon-style btn border-4 rounded-3 btn-outline-danger mobile" (click)="open(content_cars_info, branch)"></i>
+                                <i class="bi bi-person-fill icon-style btn border-4 rounded-3 btn-outline-success mobile" (click)="open(content_employees_info, branch)"></i>
+                                <i class="bi bi-x-circle btn icon-style little-x" (click)="openDeleteBranchModal(branch)"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Branch Confirmation Modal -->
+                <div id="branchConfirmationModal" class="modal" style="display: none;">
+                    <div class="modal-content">
+                        <div class="modal-header d-flex justify-content-between align-items-center">
+                            <h4>Confirmation</h4>
+                            <span class="close display-block" (click)="closeBranchDeleteModal()">&times;</span>
+                        </div>
+                        <div class="modal-body">
+                            Are you shure?
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" (click)="closeBranchDeleteModal()">Cancel</button>
+                            <button class="btn btn-danger" (click)="confirmCloseBranch()">Close Branch</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Branch Info -->
+<ng-template #content_branch_info let-modal >
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Branch Info</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+
+    <div class="modal-body">
+        <p *ngIf="selectedBranch.city" class="fw-bold" style="font-size: 1.4rem;">City: {{ selectedBranch.city }}</p>
+        <p *ngIf="selectedBranch.country" class="fw-bold" style="font-size: 1.4rem;">Country: {{ selectedBranch.country }}</p>
+        <p *ngIf="selectedBranch.address1" class="fw-bold" style="font-size: 1.4rem;">Address Position: {{ selectedBranch.address1 }}</p>
+        <p *ngIf="selectedBranch.address2" class="fw-bold" style="font-size: 1.4rem;">Reserv address: {{ selectedBranch.address2 }}</p>
+        <p *ngIf="selectedBranch.employees && selectedBranch.employees.length > 0" class="fw-bold" style="font-size: 1.4rem;">Employees count: {{ selectedBranch.employees.length }}</p>
+        <p *ngIf="selectedBranch.cars && selectedBranch.cars.length > 0" class="fw-bold" style="font-size: 1.4rem;">Cars count: {{ selectedBranch.cars.length }}</p>
+    </div>
+
+	<div class="modal-footer">
+		<button type="button" class="btn btn-outline-secondary" (click)="modal.close('Save click')">Close</button>
+	</div>
+</ng-template>
+
+<!-- Cars Info -->
+<ng-template #content_cars_info let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Cars Info</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+
+	<div class="modal-body">
+
+		<div class="mb-3">
+            <div class="row g-3">
+                
+                <!-- Cars Info -->
+                <div class="col-12" *ngFor="let car of cars; let i = index">
+                    <div [ngClass]="{
+                        'text-center mx-auto rounded-4 p-2 price-position white-card': true,
+                        'shadow-success': car.status === 'AVAILABLE',
+                        'shadow-warning': car.status === 'BOOKED',
+                        'shadow-danger': car.status !== 'AVAILABLE' && car.status !== 'BOOKED',
+                    }">
+
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="fw-bold line order-num" style="font-size: 30px; margin-left: 15px; width: 40px;">{{ i + 1 }}</span>
+                            <i class="bi btn bi-car-front-fill icon-style"></i>
+                            <span class="fw-bold status" [style.color]="car.status === 'AVAILABLE' ? 'green' : car.status === 'BOOKED' ? 'yellow' : 'red'" style="font-size: 30px;">{{ car.status }}</span>
+                            <i class="bi bi-x-circle btn icon-style" (click)="openDeleteCarModal(car)"></i>
+                        </div>
+                        
+                    </div>
+                </div>
+    
+            </div>
+        </div>
+
+        <!-- Car Confirmation Modal -->
+        <div id="carConfirmationModal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <div class="modal-header d-flex justify-content-between align-items-center">
+                    <h4>Confirmation</h4>
+                    <span class="close display-block" (click)="closeCarDeleteModal()">&times;</span>
+                </div>
+                <div class="modal-body">
+                    Are you shure?
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" (click)="closeCarDeleteModal()">Cancel</button>
+                    <button class="btn btn-danger" (click)="confirmCarDelete()">Delete Car</button>
+                </div>
+            </div>
+        </div>
+
+	</div>
+
+	<div class="modal-footer">
+        <button type="button" class="btn border-3 rounded-3 btn-outline-success" (click)="modal.close('Save click'); openAddNewCarModal()">Add new Car</button>
+        <button type="button" class="btn btn-outline-secondary" (click)="modal.close('Save click')">Close</button>
+	</div>
+</ng-template>
+
+<!-- Add New Car Modal -->
+<div id="addNewCarModal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <div class="modal-header d-flex justify-content-between align-items-center">
+            <h4>Car Data</h4>
+            <span class="close display-block" (click)="closeAddCarModal()">&times;</span>
+        </div>
+        <div class="modal-body">
+
+            <form [formGroup]="newCarForm" (ngSubmit)="onSubmitNewCar()">
+                <div class="d-flex justify-content-between mb-4 flex-wrap">
+                    
+                    <!-- Price -->
+                    <div class="col me-4">
+                        <label for="price" class="form-label">Price:</label>
+                        <input type="text" id="price" class="form-control" formControlName="price">
+                        <div *ngIf="newCarForm.get('price')?.invalid && (newCarForm.get('price')?.touched || newCarForm.get('price')?.dirty)" class="text-danger">
+                            <div *ngIf="newCarForm.get('price')?.errors?.['required']">Price is required.</div>
+                            <div *ngIf="newCarForm.get('price')?.errors?.['pattern']">Price is not valid.</div>
+                        </div>
+                    </div>
+                                
+                    <!-- Number Plate -->
+                    <div class="col">
+                        <label for="car_state_number_plate" class="form-label">Number:</label>
+                        <input type="text" id="car_state_number_plate" class="form-control" formControlName="car_state_number_plate">
+                        <div *ngIf="newCarForm.get('car_state_number_plate')?.invalid && (newCarForm.get('car_state_number_plate')?.touched || newCarForm.get('lastname')?.dirty)" class="text-danger">
+                            <div *ngIf="newCarForm.get('car_state_number_plate')?.errors?.['required']">Number Plate is required.</div>
+                            <div *ngIf="newCarForm.get('car_state_number_plate')?.errors?.['pattern']">Example: AAA 333</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-between mb-4 flex-wrap">
+                    <!-- Mileage -->
+                    <div class="col me-4">
+                        <label for="mileage" class="form-label">Mileage:</label>
+                        <input type="text" id="mileage" class="form-control" formControlName="mileage" name="mileage">
+                        <div *ngIf="newCarForm.get('mileage')?.invalid && (newCarForm.get('mileage')?.touched || newCarForm.get('mileage')?.dirty)" class="text-danger">
+                            <div *ngIf="newCarForm.get('mileage')?.errors?.['required']">Mileage is required.</div>
+                            <div *ngIf="newCarForm.get('mileage')?.errors?.['pattern']">Error.</div>
+                        </div>
+                    </div>
+
+                    <!-- Year -->
+                    <div class="col">
+                        <label for="year" class="form-label">Year:</label>
+                        <input type="year" id="year" class="form-control" formControlName="year" name="year">
+                        <div *ngIf="newCarForm.get('year')?.invalid && (newCarForm.get('year')?.touched || newCarForm.get('year')?.dirty)" class="text-danger">
+                            <div *ngIf="newCarForm.get('year')?.errors?.['required']">Year is required.</div>
+                            <div *ngIf="newCarForm.get('year')?.errors?.['pattern']">Error.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-between mb-4 flex-wrap">
+                    <!-- Brand -->
+                        <div class="col me-4">
+                        <label for="brand" class="form-label">Brand:</label>
+                        <input type="text" id="brand" class="form-control" formControlName="brand">
+                        <div *ngIf="newCarForm.get('brand')?.invalid && (newCarForm.get('brand')?.touched || newCarForm.get('brand')?.dirty)" class="text-danger">
+                            <div *ngIf="newCarForm.get('brand')?.errors?.['required']">Brand is required.</div>
+                            <div *ngIf="newCarForm.get('brand')?.errors?.['invalidValue']">Invalid brand. Please select from the list.</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Model -->
+                    <div class="col me-4">
+                        <label for="model" class="form-label">Model:</label>
+                        <input type="text" id="model" class="form-control" formControlName="model">
+                        <div *ngIf="newCarForm.get('model')?.invalid && (newCarForm.get('model')?.touched || newCarForm.get('model')?.dirty)" class="text-danger">
+                            <div *ngIf="newCarForm.get('model')?.errors?.['required']">Model is required.</div>
+                            <div *ngIf="newCarForm.get('model')?.errors?.['invalidValue']">Invalid model. Please select from the list.</div>
+                        </div>
+                    </div>                
+
+                    <!-- BodyType -->
+                    <div class="col me-4">
+                        <label for="bodyType" class="form-label">Body Type:</label>
+                        <input type="text" id="bodyType" class="form-control" formControlName="bodyType">
+                        <div *ngIf="newCarForm.get('bodyType')?.invalid && (newCarForm.get('bodyType')?.touched || newCarForm.get('bodyType')?.dirty)" class="text-danger">
+                            <div *ngIf="newCarForm.get('bodyType')?.errors?.['required']">Body Type is required.</div>
+                            <div *ngIf="newCarForm.get('bodyType')?.errors?.['invalidValue']">Invalid body type. Please select from the list.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-between mb-4 flex-wrap">
+                    <!-- Color -->
+                    <div class="col me-4">
+                        <label for="color" class="form-label">Color:</label>
+                        <input type="text" id="color" class="form-control" formControlName="color">
+                        <div *ngIf="newCarForm.get('color')?.invalid && (newCarForm.get('color')?.touched || newCarForm.get('color')?.dirty)" class="text-danger">
+                            <div *ngIf="newCarForm.get('color')?.errors?.['required']">Color is required.</div>
+                            <div *ngIf="newCarForm.get('color')?.errors?.['invalidValue']">Invalid color. Please select from the list.</div>
+                        </div>
+                    </div>
+
+                    <!-- Photo Upload -->
+                    <div class="col me-4">
+                        <label for="photos" class="form-label">Upload Photos (1-5):</label>
+                        <input type="file" id="photos" class="form-control" (change)="onFileChange($event)" multiple accept="image/*">
+                        <div *ngIf="photoFiles.length < 1 || photoFiles.length > 5" class="text-danger">
+                            You must upload between 1 and 5 photos.
+                        </div>
+                    </div>
+
+                </div>  
+                
+            </form>
+
+        </div>
+
+        <!-- Alerts -->
+        <div *ngIf="successMessage" class="alert alert-success">{{ successMessage }}</div>
+        <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+
+        <div class="modal-footer">
+            <button class="btn btn-secondary" (click)="closeAddCarModal()">Cancel</button>
+            <button class="btn btn-danger" (click)="onSubmitNewCar()">Add new car</button>
+        </div>
+        
+    </div>
+</div>
+
+<!-- Employee Info -->
+<ng-template #content_employees_info let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Employees Info</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+
+	<div class="modal-body">
+		
+        <div class="mb-3">
+            <div class="row g-3">
+
+                <!-- Employee Info -->
+                <div class="col-12" *ngFor="let employee of employees; let i = index">
+                    <div class="border border-2 border-warning shadow-sm rounded-4 p-3 mb-5 mx-auto">
+
+                        <i class="bi bi-person-circle employee-logo mb-5"></i>
+                        <span class="fw-bold card-text">{{ employee.firstname }}   {{ employee.lastname }}</span>
+                        <span class="fw-bold card-text" style="font-size: 1.5rem;">{{ employee.position }}</span>
+                        <span class="fw-bold card-text">{{ employee.email }}</span>
+                        
+                    </div>
+                </div>
+   
+            </div>
+        </div>
+
+	</div>
+
+	<div class="modal-footer">
+        <button type="button" class="btn border-3 rounded-3 btn-outline-success"
+        (click)="modal.dismiss('Cross click'); openAddEmployeeModal()">Add new Employee</button>
+        <button type="button" class="btn btn-outline-secondary" (click)="modal.close('Save click')">Close</button>
+	</div>
+</ng-template>
+
+<!-- Open Branch Modal -->
+<app-open-branch (branchCreated)="onBranchCreated()"></app-open-branch>
+
+<!-- Add Employee Modal -->
+<app-employee-management [ngClass]="{'d-none': !isAddEmployeeModalVisible}" (employeeAdded)="onEmployeeAdded()"></app-employee-management>
+
+

@@ -1,0 +1,87 @@
+@import 'swiper/css/bundle';
+
+
+/* CSS Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.d-flex {
+    height: 100%; 
+}
+
+ul, ol {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: inherit; 
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+input, button, textarea, select {
+    font-family: inherit; 
+    font-size: inherit; 
+    line-height: inherit; 
+}
+
+img {
+    max-width: 100%; 
+    height: auto; 
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: normal; 
+}
+
+button {
+    cursor: pointer; 
+}
+
+/* ============= Scrollbar ============= */
+::-webkit-scrollbar {
+    width: 8px; 
+}
+
+::-webkit-scrollbar-track {
+    background: #c4b5b5; 
+    border-radius: 10px; 
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888; 
+    border-radius: 10px; 
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
+
+/* =============  Firefox ============= */
+html {
+    scrollbar-width: thin;
+    scrollbar-color: #c4b5b5 #5e5e5e; 
+}
+
+/* =============  Scrollbar container ============= */
+.scrollable-container {
+    max-height: 400px; 
+    overflow-y: auto; 
+    overflow-x: hidden; 
+    box-sizing: border-box; 
+}
+
+

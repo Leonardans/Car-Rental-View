@@ -1,0 +1,90 @@
+/*=========== Adapting ===========*/
+@media screen and (max-width: 768px) {
+    .column {
+        flex-direction: column;
+    }
+
+    .firm {
+        display: none;
+    }
+
+    .banner {
+        display: none;
+    }
+
+    .customer {
+        margin-top: auto;
+        min-width: 100%;
+    }
+
+    .table {
+        margin-bottom: 0;
+    }
+
+    .business {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 1100px) {
+    .custom-col {
+        width: 40%; 
+    }
+    
+}
+
+@media screen and (min-width: 769px) {
+    .customer {
+        min-width: 380px;
+    }    
+}
+
+/*=========== Main Screen ===========*/
+.home {
+    position: relative;
+    min-height: 75%;
+}
+
+.home-bg {
+    position: absolute;
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+}
+
+/*=========== Cards ===========*/
+.table {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #c4b5b5;
+    border: 3px solid #303030; 
+    border-radius: 25px; 
+    opacity: 0.9;
+}
+
+.table-text {
+    max-width: 350px;
+    text-align: center;
+    font-style: italic;
+    color: #303030; 
+}
+
+.business {
+    position: absolute;
+    right: 30px;
+    bottom: 20px;
+}
+
+/*=========== Hover Effects ===========*/
+.scale-hover {
+    transition: transform 0.3s; 
+}
+
+.scale-hover:hover {
+    transform: scale(1.1); 
+}

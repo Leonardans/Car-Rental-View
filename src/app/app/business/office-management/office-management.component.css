@@ -1,0 +1,164 @@
+/*=========== Main Screen ===========*/
+.office-bg {
+    background-color: #f1eded;
+    min-height: 75%;
+}
+
+/*=========== Bootstrap Icons ===========*/
+.icon-style {
+    font-size: 2.5rem;
+    color: black;
+}
+
+.mobile {
+    margin: 20px;
+}
+
+/*=========== Separate Line ===========*/
+.line {
+    position: relative; 
+}
+
+.line::after {
+    content: '';
+    position: absolute;
+    top: 0; 
+    left: 65px; 
+    width: 4px; 
+    height: 90%; 
+    transform: translateY(5%); 
+    border-radius: 10px;
+    background-color: #000; 
+    opacity: 90%;
+}
+
+/*=========== Employee Logo ===========*/
+.employee-logo {
+    font-size: 3rem;
+    color: black;
+}
+
+/*=========== Branch info ===========*/
+.card-text {
+    font-size: 20px;
+    display: block;
+}
+
+.city {
+    flex-grow: 1;
+    margin-left: 80px;
+    font-size: 40px;
+}
+
+.order-num {
+    font-size: 50px;
+    margin-left: 15px;
+}
+
+/*=========== Real Modal ===========*/
+.modal {
+    z-index: 10000;
+    display: none;
+    position: fixed; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.4); 
+}
+
+.modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: 10% auto; 
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; 
+}
+
+.modal-body {
+    max-height: 80vh; 
+    overflow-y: auto; 
+}
+
+.modal-footer {
+    position: sticky; 
+    bottom: 0; 
+    background: white; 
+    z-index: 1; 
+}
+
+/*=========== X Close ===========*/
+.close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/*=========== Hide ===========*/
+.d-none {
+    display: none;
+}
+
+/*=========== Beauty Shadow & Business Logic ===========*/
+.shadow-danger {
+    box-shadow: 0 0 5px 5px rgba(255, 0, 0, 0.5); 
+}
+
+.shadow-success {
+    box-shadow: 0 0 5px 5px rgba(2, 83, 39, 0.308); 
+    /*box-shadow: 0 0 5px 5px rgba(47, 0, 255, 0.5);*/
+}
+
+/*=========== Adaptive Development ===========*/
+@media screen and (max-width: 768px) {
+    .city, .status {
+        display: none;
+    }
+
+    .line::after{
+        display: none;
+    }
+
+    .mobile {
+        font-size: 1.5rem;
+        margin: 10px;
+    }
+
+    .order-num {
+        margin-right: 15px;
+    }
+}
+
+@media screen and (max-width: 420px) {
+    .mobile {
+        font-size: 1.4rem;
+        margin: 10px;
+    }
+
+    .order-num {
+        margin-left: 5px;
+        font-size: 40px;
+    }
+
+}
+
+@media screen and (max-width: 385px)  {
+    .little-x {
+        position: relative;
+        left: -10px;
+    }
+    
+}

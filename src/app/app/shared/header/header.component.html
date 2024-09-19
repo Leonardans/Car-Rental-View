@@ -1,0 +1,73 @@
+<!-- Login Modal -->
+<app-login></app-login>
+
+<!-- Registration Modal -->
+<app-registration></app-registration>
+
+<!-- Open Office Modal -->
+<app-open-branch></app-open-branch>
+
+<header class="bg-dark" style="height: 15vh; min-height: 50px;">
+    <div class="d-flex align-items-center h-100 px-4">
+
+        <!-- Logo -->
+        <a class="logo logo-container btn" (click)="navigateTo('')">
+            <img *ngIf="isUserLoggedIn && userType === 'Business'; else defaultLogo" 
+                [src]="rentalLogoPath" 
+                alt="Rental Logo"
+                class="img-fluid" >
+            <ng-template #defaultLogo>
+                <img src="/assets/logo/sun.png" alt="logo" class="img-fluid">
+            </ng-template>
+        </a>
+
+        <!-- Burger Menu -->
+        <div class="menu_icon" (click)="toggleMenu()" [ngClass]="{'active': isMenuActive}">
+			<span></span>
+		</div>
+
+        <div class="nav" id="nav" [ngClass]="{'active': isNavActive}">
+            <ul class="d-flex align-items-center">
+                <li class="nav_link"><a class="text-white me-4 yellow-decor" (click)="navigateTo('about-us'); toggleMenu()">About us</a></li>
+                <li class="nav_link"><a class="text-white me-4 yellow-decor" (click)="navigateTo('cars'); toggleMenu()">See all Cars</a></li>
+                <li class="nav_link"><a class="text-white me-4 yellow-decor" (click)="navigateTo('partners'); toggleMenu()">Partners</a></li>
+            </ul>
+        </div>
+
+        <!-- Unauthorized, Customer, Firm or Admin -->
+        <div class="d-flex align-items-center ms-auto">
+
+            <!-- Admin -->
+            <ng-container *ngIf="isAdminLoggedIn; else userTemplate">
+                <button class="btn btn-danger me-2">Admin Button 1</button>
+                <button class="btn btn-warning">Admin Button 2</button>
+            </ng-container>
+
+            <!-- Business or Customer -->
+            <ng-template #userTemplate>
+                <ng-container *ngIf="(userType === 'Business' || userType === 'Customer') && isUserLoggedIn; else guestTemplate">
+                    <!-- Business -->
+                    <ng-container *ngIf="userType === 'Business'">
+                        <i class="bi bi-buildings icon-style btn border-4 rounded-3 border-warning scale-hover me-4" (click)="navigateTo('office-management')"></i>
+                        <i class="bi bi-house-add icon-style btn border-4 rounded-3 btn-outline-success me-2" (click)="openBranchModal()"></i>
+                        <i class="bi bi-person-arms-up icon-style btn border-4 rounded-3 btn-outline-danger me-2" (click)="navigateTo('employee-management')"></i>
+                    </ng-container>
+
+                    <!-- Customer -->
+                    <ng-container *ngIf="userType === 'Customer'">
+                        <i class="bi bi-box2-heart icon-style btn border-5 rounded-3 btn-outline-primary me-3 scale-hover" (click)="navigateTo('garage')"></i>
+                        <i class="bi bi-ev-station icon-style btn border-4 rounded-3 btn-outline-warning scale-hover" (click)="navigateTo('rented')"></i>
+                    </ng-container>
+                </ng-container>
+
+                <!-- Guest -->
+                <ng-template #guestTemplate>
+                    <a class="text-white me-3 yellow-decor" (click)="openLoginModal()">Log in</a>
+                    <a class="btn border-2 rounded-3 btn-outline-success text-white scale-hover" (click)="openRegistrationModal()">Sign up</a>
+                </ng-template>
+            </ng-template>
+        </div>
+
+    </div>                          
+</header>
+

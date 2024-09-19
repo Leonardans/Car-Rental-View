@@ -1,0 +1,9 @@
+/*=========== Hover Effects ===========*/
+.scale-hover {
+    cursor: pointer;
+    transition: transform 0.3s; 
+}
+
+.scale-hover:hover {
+    transform: scale(1.1); 
+}

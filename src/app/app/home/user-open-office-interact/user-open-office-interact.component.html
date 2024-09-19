@@ -1,0 +1,19 @@
+<!-- Login Modal -->
+<app-login></app-login>
+
+<!-- Registration Modal -->
+<app-registration></app-registration>
+
+<ng-template #content_open_office_interact let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Do you have a Business account?</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body mx-auto">
+        <button type="button" class="btn border-4 rounded-3 btn-outline-success fw-bold me-5" (click)="modal.dismiss('Cross click'); callLoginModal()">Yes</button>
+        <button type="button" class="btn border-4 rounded-3 btn-outline-danger fw-bold" (click)="modal.dismiss('Cross click'); callRegistrationModal()">No</button>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('Cross click')">Exit</button>
+    </div>
+</ng-template>

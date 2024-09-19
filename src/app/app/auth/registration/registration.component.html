@@ -1,0 +1,296 @@
+<ng-template #content_registration let-modal>
+
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Seize your chance to shine!</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+	
+	<div class="modal-body">
+		
+        <ul class="nav nav-tabs mb-5" id="myTab" role="tablist">
+			<li class="nav-item" role="presentation">
+				<button class="nav-link active" id="customer-tab" data-bs-toggle="tab" data-bs-target="#customer" type="button" role="tab" aria-controls="customer" aria-selected="true" (click)="onUserTypeChange(); userType = 'Customer'">Customer</button>
+			</li>
+			<li class="nav-item" role="presentation">
+				<button class="nav-link" id="business-tab" data-bs-toggle="tab" data-bs-target="#business" type="button" role="tab" aria-controls="business" aria-selected="false" (click)="onUserTypeChange(); userType = 'Business'">Business</button>
+			</li>
+		</ul>
+
+        <div class="form_container">
+			<div class="tab-content mb-5" id="myTabContent">
+				
+				<!-- Customer -->
+				<div class="tab-pane fade show active p-2" id="customer" role="tabpanel" aria-labelledby="customer-tab">
+					<form [formGroup]="customerForm" (ngSubmit)="onSubmitCustomer()">
+	
+						<div class="d-flex justify-content-between mb-4">
+							<!-- First Name -->
+							<div class="me-4">
+								<label for="firstname" class="form-label">First Name:</label>
+								<input type="text" id="firstname" class="form-control" formControlName="firstname" autocomplete="given-name">
+								<div *ngIf="customerForm.get('firstname')?.invalid && (customerForm.get('firstname')?.touched || customerForm.get('firstname')?.dirty)" class="text-danger">
+									<div *ngIf="customerForm.get('firstname')?.errors?.['required']">Name is required.</div>
+									<div *ngIf="customerForm.get('firstname')?.errors?.['pattern']">Name is not valid.</div>
+								</div>
+							</div>
+										
+							<!-- Last Name -->
+							<div class="">
+								<label for="lastname" class="form-label">Last Name:</label>
+								<input type="text" id="lastname" class="form-control" formControlName="lastname" autocomplete="family-name">
+								<div *ngIf="customerForm.get('lastname')?.invalid && (customerForm.get('lastname')?.touched || customerForm.get('lastname')?.dirty)" class="text-danger">
+									<div *ngIf="customerForm.get('lastname')?.errors?.['required']">Last Name is required.</div>
+									<div *ngIf="customerForm.get('lastname')?.errors?.['pattern']">Error.</div>
+								</div>
+							</div>
+						</div>
+	
+						<div class="d-flex justify-content-between mb-4">
+							<!-- Username -->
+							<div class="me-4">
+								<label for="username" class="form-label">Username</label>
+								<input type="text" id="username" class="form-control" formControlName="username" name="username" autocomplete="username">
+								<div *ngIf="customerForm.get('username')?.invalid && (customerForm.get('username')?.touched || customerForm.get('username')?.dirty)" class="text-danger">
+									<div *ngIf="customerForm.get('username')?.errors?.['required']">Username is required.</div>
+									<div *ngIf="customerForm.get('username')?.errors?.['pattern']">Error.</div>
+								</div>
+							</div>
+
+							<!-- Password -->
+							<div class="">
+								<label for="password" class="form-label">Password:</label>
+								<input type="password" id="password" class="form-control" formControlName="password" name="password" autocomplete="new-password">
+								<div *ngIf="customerForm.get('password')?.invalid && (customerForm.get('password')?.touched || customerForm.get('password')?.dirty)" class="text-danger">
+									<div *ngIf="customerForm.get('password')?.errors?.['required']">Password is required.</div>
+									<div *ngIf="customerForm.get('password')?.errors?.['pattern']">Error.</div>
+								</div>
+							</div>
+						</div>
+					
+						<!-- Email -->
+						<div class="mb-3">
+							<label for="email" class="form-label">Email:</label>
+							<input type="email" id="email" class="form-control" formControlName="email" name="email" autocomplete="email">
+							<div *ngIf="customerForm.get('email')?.invalid && (customerForm.get('email')?.touched || customerForm.get('email')?.dirty)" class="text-danger">
+								<div *ngIf="customerForm.get('email')?.errors?.['required']">Email is required.</div>
+								<div *ngIf="customerForm.get('email')?.errors?.['pattern']">Email is not valid.</div>
+							</div>
+						</div>
+	
+	
+						<div class="d-flex justify-content-between mb-4">
+							<!-- Address (main) -->
+							<div class="me-4">
+								<label for="mainAddress" class="form-label">Address (main):</label>
+								<input type="text" id="mainAddress" class="form-control" formControlName="mainAddress" name="mainAddress" autocomplete="address-line1">
+								<div *ngIf="customerForm.get('mainAddress')?.invalid && (customerForm.get('mainAddress')?.touched || customerForm.get('mainAddress')?.dirty)" class="text-danger">
+									<div *ngIf="customerForm.get('mainAddress')?.errors?.['required']">Address is required.</div>
+									<div *ngIf="customerForm.get('mainAddress')?.errors?.['pattern']">Address is not valid.</div>
+								</div>
+							</div>
+	
+							<!-- Address (additional) -->
+							<div class="">
+								<label for="additionalAddress" class="form-label">Address (addition):</label>
+								<input type="text" id="additionalAddress" class="form-control" formControlName="additionalAddress" name="additionalAddress" autocomplete="address-line2">
+								<div *ngIf="customerForm.get('additionalAddress')?.invalid && (customerForm.get('additionalAddress')?.touched || customerForm.get('additionalAddress')?.dirty)" class="text-danger">
+									<div *ngIf="customerForm.get('additionalAddress')?.errors?.['required']">Address is required.</div>
+									<div *ngIf="customerForm.get('additionalAddress')?.errors?.['pattern']">Address is not valid.</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="d-flex justify-content-between mb-4">
+							<!-- City -->
+							<div class="me-4">
+								<label for="city" class="form-label">City:</label>
+								<input type="text" id="city" class="form-control" formControlName="city" name="city" list="cities" autocomplete="address-level2">
+								<datalist id="cities">
+									<option value="Tallinn"></option>
+									<option value="Tartu"></option>
+									<option value="Narva"></option>
+									<option value="Lethse"></option>
+									<option value="Tapa"></option>
+								</datalist>
+								<div *ngIf="customerForm.get('city')?.invalid && (customerForm.get('city')?.touched || customerForm.get('city')?.dirty)" class="text-danger">
+									<div *ngIf="customerForm.get('city')?.errors?.['required']">City is required.</div>
+									<div *ngIf="customerForm.get('city')?.errors?.['pattern']">City is nto valid.</div>
+								</div>
+							</div>
+	
+							<!-- Country -->
+							<div class="">
+								<label for="country" class="form-label">Country:</label>
+								<input type="text" id="country" class="form-control" formControlName="country" name="country" autocomplete="country">
+								<div *ngIf="customerForm.get('country')?.invalid && (customerForm.get('country')?.touched || customerForm.get('country')?.dirty)" class="text-danger">
+									<div *ngIf="customerForm.get('country')?.errors?.['required']">Country is required.</div>
+									<div *ngIf="customerForm.get('country')?.errors?.['pattern']">Currently, Estonia.</div>
+								</div>
+							</div>
+						</div>
+						
+						<!-- Licence -->
+						<div class="mb-3">
+							<label for="licence" class="form-label d-block">Licence:</label>
+							<div ngbDropdown class="d-inline-block">
+								<button type="button" class="btn border-2 rounded-3 btn-outline-dark" ngbDropdownToggle>
+									{{ customerForm.get('licence')?.value || 'Select Licence' }}
+								</button>
+								<div ngbDropdownMenu aria-labelledby="dropdownBasic2" class="custom-dropdown-menu">
+									<button ngbDropdownItem class="hover" (click)="selectLicence('AM_MOPEED')">AM_MOPEED</button>
+									<button ngbDropdownItem class="hover" (click)="selectLicence('A_MOOTORRATAS')">A_MOOTORRATAS</button>
+									<button ngbDropdownItem class="hover" (click)="selectLicence('B_SOIDUAUTO')">B_SOIDUAUTO</button>
+									<button ngbDropdownItem class="hover" (click)="selectLicence('C_VEOAUTO')">C_VEOAUTO</button>
+									<button ngbDropdownItem class="hover" (click)="selectLicence('D_AUTOBUSS')">D_AUTOBUSS</button>
+								</div>
+							</div>
+							<div *ngIf="customerForm.get('licence')?.invalid && (customerForm.get('licence')?.touched || customerForm.get('licence')?.dirty)" class="text-danger">
+								<div *ngIf="customerForm.get('licence')?.errors?.['required']">Licence is required.</div>
+							</div>
+						</div>
+
+					</form>
+				</div>
+	
+				<!-- Business -->
+				<div class="tab-pane fade" id="business" role="tabpanel" aria-labelledby="business-tab">
+					<form [formGroup]="businessForm" (ngSubmit)="onSubmitBusiness()">
+	
+						<!-- Owner -->
+						<div class="mb-3">
+							<label for="owner" class="form-label">Full Name:</label>
+							<input type="text" id="owner" class="form-control" formControlName="owner" name="owner" autocomplete="name">
+							<div *ngIf="customerForm.get('owner')?.invalid && (customerForm.get('owner')?.touched || customerForm.get('owner')?.dirty)" class="text-danger">
+								<div *ngIf="customerForm.get('owner')?.errors?.['required']">Name is required.</div>
+								<div *ngIf="customerForm.get('owner')?.errors?.['pattern']">Check name.</div>
+							</div>
+						</div>
+	
+						<!-- Business Name -->
+						<div class="mb-3">
+							<label for="businessName" class="form-label">Business Name:</label>
+							<input type="text" id="businessName" class="form-control" formControlName="businessName" name="businessName" autocomplete="organization">
+							<div *ngIf="customerForm.get('businessName')?.invalid && (customerForm.get('businessName')?.touched || customerForm.get('businessName')?.dirty)" class="text-danger">
+								<div *ngIf="customerForm.get('businessName')?.errors?.['required']">Business name is required.</div>
+								<div *ngIf="customerForm.get('businessName')?.errors?.['pattern']">Check the business name.</div>
+							</div>
+						</div>
+
+						<div class="d-flex justify-content-between mb-4">
+							<!-- Username -->
+							<div class="me-4">
+								<label for="businessUsername" class="form-label">Business Username:</label>
+								<input type="text" id="businessUsername" class="form-control" formControlName="businessUsername" name="businessUsername" autocomplete="username">
+								<div *ngIf="customerForm.get('businessUsername')?.invalid && (customerForm.get('businessUsername')?.touched || customerForm.get('businessUsername')?.dirty)" class="text-danger">
+									<div *ngIf="customerForm.get('businessUsername')?.errors?.['required']">Business name is required.</div>
+									<div *ngIf="customerForm.get('businessUsername')?.errors?.['pattern']">Check the business name.</div>
+								</div>
+							</div>
+
+							<!-- Password -->
+							<div class="mb-3">
+								<label for="businessPassword" class="form-label">Password:</label>
+								<input type="password" id="businessPassword" class="form-control" formControlName="businessPassword" name="businessPassword" autocomplete="new-password">
+								<div *ngIf="customerForm.get('businessPassword')?.invalid && (customerForm.get('password')?.touched || customerForm.get('businessPassword')?.dirty)" class="text-danger">
+									<div *ngIf="customerForm.get('businessPassword')?.errors?.['required']">Password is required.</div>
+									<div *ngIf="customerForm.get('businessPassword')?.errors?.['pattern']">Check the password.</div>
+								</div>
+							</div>
+						</div>
+					
+						<!-- Email -->
+						<div class="mb-3">
+							<label for="businessEmail" class="form-label">Email:</label>
+							<input type="email" id="businessEmail" class="form-control" formControlName="businessEmail" name="businessEmail" autocomplete="email">
+							<div *ngIf="customerForm.get('email')?.invalid && (customerForm.get('email')?.touched || customerForm.get('email')?.dirty)" class="text-danger">
+								<div *ngIf="customerForm.get('email')?.errors?.['required']">Email is required.</div>
+								<div *ngIf="customerForm.get('email')?.errors?.['pattern']">Check the email.</div>
+							</div>
+						</div>
+							
+						<div class="d-flex justify-content-between mb-4">
+							<!-- Address (main) -->
+							<div class="me-4">
+								<label for="mainBusinessAddress" class="form-label">Address (main):</label>
+								<input type="text" id="mainBusinessAddress" class="form-control" formControlName="mainBusinessAddress" name="mainBusinessAddress" autocomplete="address-line1">
+								<div *ngIf="customerForm.get('mainBusinessAddress')?.invalid && (customerForm.get('mainBusinessAddress')?.touched || customerForm.get('mainBusinessAddress')?.dirty)" class="text-danger">
+									<div *ngIf="customerForm.get('mainBusinessAddress')?.errors?.['required']">Address is required.</div>
+									<div *ngIf="customerForm.get('mainBusinessAddress')?.errors?.['pattern']">Address is not valid.</div>
+								</div>
+							</div>
+	
+							<!-- Address (addition) -->
+							<div class="">
+								<label for="additionaBusinesslAddress" class="form-label">Address (addition):</label>
+								<input type="text" id="additionaBusinesslAddress" class="form-control" formControlName="additionaBusinesslAddress" name="additionaBusinesslAddress" autocomplete="address-line2">
+								<div *ngIf="customerForm.get('additionaBusinesslAddress')?.invalid && (customerForm.get('additionaBusinesslAddress')?.touched || customerForm.get('additionaBusinesslAddress')?.dirty)" class="text-danger">
+									<div *ngIf="customerForm.get('additionaBusinesslAddress')?.errors?.['required']">Address is required.</div>
+									<div *ngIf="customerForm.get('additionaBusinesslAddress')?.errors?.['pattern']">Address is not valid.</div>
+								</div>
+							</div>
+						</div>
+	
+						<div class="d-flex justify-content-between mb-4">
+							<!-- City -->
+							<div class="me-4">
+								<label for="businessCity" class="form-label">City:</label>
+								<input type="text" id="businessCity" class="form-control" formControlName="businessCity" name="businessCity" list="cities" autocomplete="address-level2">
+								<datalist id="cities">
+									<option value="Tallinn"></option>
+									<option value="Tartu"></option>
+									<option value="Narva"></option>
+									<option value="Lethse"></option>
+									<option value="Tapa"></option>
+								</datalist>
+								<div *ngIf="customerForm.get('businessCity')?.invalid && (customerForm.get('businessCity')?.touched || customerForm.get('businessCity')?.dirty)" class="text-danger">
+									<div *ngIf="customerForm.get('businessCity')?.errors?.['required']">Business city is required.</div>
+									<div *ngIf="customerForm.get('businessCity')?.errors?.['pattern']">Business city is not valid.</div>
+								</div>
+							</div>
+	
+							<!-- Country -->
+							<div class="">
+								<label for="businessCountry" class="form-label">Country:</label>
+								<input type="text" id="businessCountry" class="form-control" formControlName="businessCountry" autocomplete="country">
+								<div *ngIf="businessForm.get('businessCountry')?.invalid && (businessForm.get('businessCountry')?.touched || businessForm.get('businessCountry')?.dirty)" class="text-danger">
+									<div *ngIf="businessForm.get('businessCountry')?.errors?.['required']">Business country is required.</div>
+									<div *ngIf="businessForm.get('businessCountry')?.errors?.['pattern']">Currently, Estonia.</div>
+								</div>
+							</div>
+	
+						</div>
+	
+						<!-- Logo Upload -->
+						<div class="mb-3">
+							<label for="businessLogo" class="form-label">Upload Logo (PNG):</label>
+							<input type="file" id="businessLogo" class="form-control" (change)="onFileSelected($event)" accept=".png">
+							<div *ngIf="customerForm.get('businessLogo')?.invalid && (customerForm.get('businessLogo')?.touched || customerForm.get('businessLogo')?.dirty)" class="text-danger">
+								<div *ngIf="customerForm.get('businessLogo')?.errors?.['required']">Business logo is required.</div>
+								<div *ngIf="customerForm.get('businessLogo')?.errors?.['pattern']">Business logo is too big.</div>
+							</div>
+						</div>
+		
+					</form>
+	
+				</div>
+
+			</div>
+        </div>
+
+		<!-- Alerts -->
+		<div *ngIf="successMessage" class="alert alert-success">{{ successMessage }}</div>
+		<div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+
+    </div>
+
+    <!-- Send or Close buttons -->
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" (click)="modal.close('Cross click')">Cancel</button>
+        <button type="button" class="btn btn-primary" 
+                (click)="userType === 'Customer' ? onSubmitCustomer() : onSubmitBusiness()" 
+                [disabled]="(userType === 'Customer' && !customerForm.valid) || (userType === 'Business' && !businessForm.valid)">
+            Registration
+        </button>
+    </div>
+
+</ng-template>

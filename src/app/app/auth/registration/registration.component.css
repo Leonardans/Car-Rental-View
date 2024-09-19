@@ -1,0 +1,45 @@
+/*=========== Form Input Styling ===========*/
+input.ng-invalid.ng-touched {
+    border-color: red;
+}
+
+/*=========== NG Modal Styling ===========*/
+.modal-body {
+    height: 80vh; 
+    overflow-y: auto; 
+}
+
+.modal-footer {
+    position: sticky; 
+    bottom: 0; 
+    background: white; 
+    z-index: 1; 
+}
+
+/*=========== Hover Effects ===========*/
+.hover {
+    transition: transform 0.1s; 
+}
+
+.hover:hover {
+    background-color: #b4a9a9;
+    border-radius: 5px;
+    transform: scale(1.1); 
+}
+
+/*=========== Licence Dropdown Menu ===========*/
+.custom-dropdown-menu {
+    max-height: 200px; 
+    overflow-y: auto; 
+    overflow-x: hidden; 
+    box-sizing: border-box; 
+}
+
+/*=========== Adapting ===========*/
+@media screen and (max-width: 768px) {
+    .modal-body {
+        height: 75vh; 
+    }
+}
+
+

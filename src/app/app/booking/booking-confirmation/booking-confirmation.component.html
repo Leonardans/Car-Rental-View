@@ -1,0 +1,33 @@
+
+<div class="booking-confirmation">
+    <div class="container">
+
+        <div *ngIf="branchInfo">
+            <div class="info-card shadow-warning rounded-4 p-4 text-center mx-auto">
+
+                <!-- Rental Logo -->
+                <div class="logo-container mb-5">
+                    <img [src]="branchInfo.logoUrl" alt="Rental Logo" class="img-fluid">
+                </div>
+
+                <!-- Rental Name -->
+                <h1>{{branchInfo.name}}</h1>
+
+
+                <!-- Branch Position -> City + Address -->
+                <p class="fw-bold" style="font-size: 1.5rem;">{{branchInfo.city}}</p>
+                <p class="fw-bold" style="font-size: 1.5rem;">{{branchInfo.address1}}</p>
+
+                <!-- Additional Info -->
+                <p>Remember, if you do not show up or cancel your reservation at least 2 days before the scheduled date, 
+                    you will still be required to pay 80% of the rental amount.
+                </p>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+

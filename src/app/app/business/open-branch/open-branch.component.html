@@ -1,0 +1,81 @@
+<ng-template #content_open_branch let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Open Branch Credentials</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+		<div class="form_container">
+			<div class="tab-content mb-5" id="myTabContent">
+				
+				<!-- Branch -->
+				<div class="tab-pane fade show active p-2" id="customer" role="tabpanel" aria-labelledby="customer-tab">
+					<form [formGroup]="openBranchForm" (ngSubmit)="onSubmitBranch()">
+								
+						<!-- Address (main) -->
+						<div class="mb-4">
+							<label for="mainBranchAddress" class="form-label">Address (main):</label>
+							<input type="text" id="mainBranchAddress" class="form-control" formControlName="mainBranchAddress" name="mainBranchAddress">
+							<div *ngIf="openBranchForm.get('mainBranchAddress')?.invalid && (openBranchForm.get('mainBranchAddress')?.touched || openBranchForm.get('mainBranchAddress')?.dirty)" class="text-danger">
+								<div *ngIf="openBranchForm.get('mainBranchAddress')?.errors?.['required']">Address is required.</div>
+								<div *ngIf="openBranchForm.get('mainBranchAddress')?.errors?.['pattern']">Address is not valid.</div>
+							</div>
+						</div>
+
+						<!-- Address (additional) -->
+						<div class="mb-4">
+							<label for="additionalBranchAddress" class="form-label">Address (addition):</label>
+							<input type="text" id="additionalBranchAddress" class="form-control" formControlName="additionalBranchAddress" name="additionalBranchAddress">
+							<div *ngIf="openBranchForm.get('additionalBranchAddress')?.invalid && (openBranchForm.get('additionalBranchAddress')?.touched || openBranchForm.get('additionalBranchAddress')?.dirty)" class="text-danger">
+								<div *ngIf="openBranchForm.get('additionalBranchAddress')?.errors?.['required']">Address is required.</div>
+								<div *ngIf="openBranchForm.get('additionalBranchAddress')?.errors?.['pattern']">Address is not valid.</div>
+							</div>
+						</div>
+
+						<!-- City -->
+						<div class="mb-4">
+							<label for="branchCity" class="form-label">City:</label>
+							<input type="text" id="branchCity" class="form-control" formControlName="branchCity" name="branchCity" list="cities">
+							<datalist id="cities">
+								<option value="Tallinn"></option>
+								<option value="Tartu"></option>
+								<option value="Narva"></option>
+								<option value="Lethse"></option>
+								<option value="Tapa"></option>
+							</datalist>
+							<div *ngIf="openBranchForm.get('branchCity')?.invalid && (openBranchForm.get('city')?.touched || openBranchForm.get('branchCity')?.dirty)" class="text-danger">
+								<div *ngIf="openBranchForm.get('branchCity')?.errors?.['required']">City is required.</div>
+								<div *ngIf="openBranchForm.get('branchCity')?.errors?.['pattern']">City is nto valid.</div>
+							</div>
+						</div>
+
+						<!-- Country -->
+						<div class="mb-4">
+							<label for="branchCountry" class="form-label">Country:</label>
+							<input type="text" id="branchCountry" class="form-control" formControlName="branchCountry" name="branchCountry">
+							<div *ngIf="openBranchForm.get('country')?.invalid && (openBranchForm.get('branchCountry')?.touched || openBranchForm.get('branchCountry')?.dirty)" class="text-danger">
+								<div *ngIf="openBranchForm.get('branchCountry')?.errors?.['required']">Country is required.</div>
+								<div *ngIf="openBranchForm.get('branchCountry')?.errors?.['pattern']">Currently, Estonia.</div>
+							</div>
+						</div>
+
+					</form>
+				</div>
+
+			</div>
+		</div>
+
+		<!-- Alerts -->
+		<div *ngIf="successMessage" class="alert alert-success">{{ successMessage }}</div>
+		<div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+
+	</div>
+
+	<!-- Send or Close buttons -->
+	<div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" (click)="modal.close('Cross click')">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="onSubmitBranch()" [disabled]="(!openBranchForm.valid)">
+            Open Branch
+        </button>
+    </div>
+
+</ng-template>
