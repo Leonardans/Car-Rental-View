@@ -131,7 +131,7 @@ export class LoginComponent {
                 this.errorMessage = null; 
                 this.onUserTypeChange();
                 this.modalService.dismissAll(); 
-                this.router.navigate(['/']); 
+                location.reload();
             },
             (error) => {
                 if (error.status === 401) {

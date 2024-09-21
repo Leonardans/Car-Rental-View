@@ -3,7 +3,6 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { environment } from './environments/environment';
 import { AppModule } from '../src/app/app.module';
 
-import 'bootstrap-icons/font/bootstrap-icons.css';
 
 if (environment.production) {
     enableProdMode();
